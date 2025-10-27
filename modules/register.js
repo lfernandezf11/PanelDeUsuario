@@ -11,6 +11,10 @@ let legalAgeEl = document.getElementById('regLegalAge');
 let ageEl = document.getElementById('regAge').parentElement; //Como el input age está contenido en el div inputInline, hacemos referencia a él para controlar el display de todo el bloque.
 let submitBtnEl = document.getElementById('regSubmitBtn');
 
+legalAgeEl.checked = false; // Estado inicial del checkbox, desmarcado.
+ageEl.style.display = 'none'; // Estado inicial del campo de edad, oculto.
+
+
 let nameValid = false;
 let passwdValid = false;
 let tlfValid= false;
