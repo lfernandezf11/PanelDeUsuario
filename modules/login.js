@@ -2,9 +2,9 @@ import { regUser, regPasswd } from './../utils/constants.js';
 import { hashText } from './../utils/crypto.js';
 
 let formEl = document.getElementById('login-view');
-let userNameEl = document.getElementById('user');
-let passwdEl = document.getElementById('password');
-let submitBtnEl = document.getElementById('submitBtn');
+let userNameEl = document.getElementById('logUser');
+let passwdEl = document.getElementById('logPass');
+let submitBtnEl = document.getElementById('logSubmitBtn');
 
 let nameValid = false;
 let passwdValid = false;

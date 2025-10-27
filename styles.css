@@ -14,9 +14,11 @@ main{
   align-items: center;
   justify-content: center;
 }
+
 h2{
   margin-bottom: 0.8rem;
 }
+
 input{
   padding: 10px;
   border-radius: 15px;
@@ -33,6 +35,7 @@ button {
   cursor: pointer;
   transition: background 0.2s, opacity 0.2s;
 }
+
 button:hover {
   background:#0d11cc;
   color: white;
@@ -43,7 +46,6 @@ small {
   color: red;
   height: 1em;
 }
-
 
 .success{
   border: solid 3px green;
@@ -58,8 +60,6 @@ small {
   background: #fff7d1;
   opacity: 30%;
 }
-
-
 
 .view{
   display: flex;
@@ -76,7 +76,9 @@ small {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.2rem;
+  margin-top: 1.8rem;
+
 }
 
 .inputInline {
@@ -91,18 +93,6 @@ small {
   flex-direction: column;
   width: 100%;
 }
-
-
-
-#submitBtn {
-  background: #f0cb09;
-
-}#submitBtn:hover {
-  background:#0d11cc;
-}
-
-
-
 
 .linklike {
   background: none;
@@ -122,5 +112,20 @@ small {
   color: #32047c;
 }
 
-.view { display: none; }
-.view.active { display: block; }
+.view { 
+  display: none; 
+}
+
+.view.active { 
+  display: block; 
+}
+#logSubmitBtn, #regSubmitBtn {
+  background: #f0cb09;
+
+}#logSubmitBtn:hover, #regSubmitBtn:hover  {
+  background:#0d11cc;
+}
+
+#logSubmitBtn.notAvailable, #regSubmitBtn.notAvailable{
+  pointer-events: none; /* Bloquea las interacciones con el botón, no se aplica #submitBtn:hover*/
+}

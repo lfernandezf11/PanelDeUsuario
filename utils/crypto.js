@@ -21,7 +21,7 @@ export function generateSalt() {
 }
 
 // Manejo de registro
-document.getElementById("btnRegister").addEventListener("click", async () => {
+document.getElementById("regSubmitBtn").addEventListener("click", async () => {
   const username = document.getElementById("regUser").value.trim();
   const password = document.getElementById("regPass").value;
 
@@ -41,7 +41,7 @@ document.getElementById("btnRegister").addEventListener("click", async () => {
 });
 
 // Manejo de login
-document.getElementById("btnLogin").addEventListener("click", async () => {
+document.getElementById("logSubmitBtn").addEventListener("click", async () => {
   const username = document.getElementById("logUser").value.trim();
   const password = document.getElementById("logPass").value;
 

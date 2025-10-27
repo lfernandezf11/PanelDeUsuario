@@ -1,14 +1,15 @@
-import { regUser, regPasswd, regTel, regPCode } from './../utils/constants.js';
+import { showView } from '../utils/dom.js';
+import { regUser, regPasswd, regTel, regPCode } from '../utils/constants.js';
 import { hashText, generateSalt } from './../utils/crypto.js';
 
 let formEl = document.getElementById('register-view');
-let userNameEl = document.getElementById('user');
-let passwdEl = document.getElementById('password');
-let tlfEl = document.getElementById('tlf');
-let pCodeEl= document.getElementById('pCode');
-let legalAgeEl = document.getElementById('legalAge');
-let ageEl = document.getElementById('age').parentElement; //Como el input age está contenido en el div inputInline, hacemos referencia a él para controlar el display de todo el bloque.
-let submitBtnEl = document.getElementById('submitBtn');
+let userNameEl = document.getElementById('regUser');
+let passwdEl = document.getElementById('regPass');
+let tlfEl = document.getElementById('regTlf');
+let pCodeEl= document.getElementById('regPCode');
+let legalAgeEl = document.getElementById('regLegalAge');
+let ageEl = document.getElementById('regAge').parentElement; //Como el input age está contenido en el div inputInline, hacemos referencia a él para controlar el display de todo el bloque.
+let submitBtnEl = document.getElementById('regSubmitBtn');
 
 let nameValid = false;
 let passwdValid = false;
@@ -72,6 +73,8 @@ formEl.addEventListener('submit', e => {
   if (!formEl.checkValidity()) {
     formEl.reportValidity();
     return;
+  } else {
+    showView('login-view');
   }
   console.log('Formulario válido');
 });

@@ -15,15 +15,15 @@
     <form name="login-form" id="login-view" class="view active" action="#" method="post">
       <h2>Iniciar Sesión</h2>
       <div class="inputContainer">
-        <input type="text" id="user" name="text" placeholder="Usuario" required>
+        <input type="text" id="logUser" name="text" placeholder="Usuario" required>
         <small class="noValid"></small>
       </div>
       <div class="inputContainer">
-        <input type="password" id="password" name="password" placeholder="Contraseña" minlength="6" required>
+        <input type="password" id="logPass" name="password" placeholder="Contraseña" required>
         <small class="noValid"></small>
       </div>
       <div class="btnGroup">
-      <button id="submitBtn" type="submit" class="notAvailable">Entrar</button>
+      <button id="logSubmitBtn" type="submit" class="notAvailable">Entrar</button>
       <button id="signInBtn" class="linklike">Registrarse</button>
       </div>
     </form>
@@ -31,32 +31,32 @@
     <form name="register-form" id="register-view" class="view active" action="#" method="post">
       <h2>Registro</h2>
       <div class="inputContainer">
-        <input type="text" id="user" name="text" placeholder="Usuario" required>
+        <input type="text" id="regUser" name="text" placeholder="Usuario" required>
         <small class="noValid"></small>
       </div>
       <div class="inputContainer">
-        <input type="password" id="password" name="password" placeholder="Contraseña" minlength="6" required>
+        <input type="password" id="regPass" name="password" placeholder="Contraseña" required>
         <small class="noValid"></small>
       </div>
       <div class="inputContainer">
-        <input type="tel" id="tlf" name="tlf" placeholder="Teléfono" length="9" required>
+        <input type="tel" id="regTlf" name="tlf" placeholder="Teléfono" length="9" required>
         <small class="noValid"></small>
       </div>
       <div class="inputContainer">
-        <input type="number" id="pCode" name="pCode" placeholder="Código Postal" length="5" required>
+        <input type="number" id="regPCode" name="pCode" placeholder="Código Postal" length="5" required>
         <small class="noValid"></small>
       </div>
       <div class="inputInline">
-        <input type="checkbox" id="legalAge" name="legalAge" value="true">
+        <input type="checkbox" id="regLegalAge" name="legalAge" value="true">
         <label for="legalAge">Soy mayor de edad</label>
         <small class="noValid"></small>
       </div>
       <div class="inputInline">
-        <input type="number" id="age" name="age" min="18" max="99" required>
+        <input type="number" id="regAge" name="age" min="18" max="99" required>
         <small class="noValid"></small>
       </div>
       <div class="btnGroup">
-      <button id="submitBtn" type="submit" class="notAvailable">Crear Cuenta</button>
+      <button id="regSubmitBtn" type="submit" class="notAvailable">Crear Cuenta</button>
       <button id="loginBtn" class="linklike">¿Ya tienes cuenta? Inicia sesión</button>
       </div>
     </form>
