@@ -21,47 +21,47 @@ export function generateSalt() {
 }
 
 // Manejo de registro
-document.getElementById("regSubmitBtn").addEventListener("click", async () => {
-  const username = document.getElementById("regUser").value.trim();
-  const password = document.getElementById("regPass").value;
+// document.getElementById("regSubmitBtn").addEventListener("click", async () => {
+//   const username = document.getElementById("regUser").value.trim();
+//   const password = document.getElementById("regPass").value;
 
-  if (!username || !password) {
-    showMessage("Por favor, completa todos los campos");
-    return;
-  }
+//   if (!username || !password) {
+//     showMessage("Por favor, completa todos los campos");
+//     return;
+//   }
 
-  const salt = generateSalt();
-  const hash = await hashText(password + salt);
+//   const salt = generateSalt();
+//   const hash = await hashText(password + salt);
 
-  const users = JSON.parse(localStorage.getItem("users") || "{}");
-  users[username] = { salt, hash };
-  localStorage.setItem("users", JSON.stringify(users));
+//   const users = JSON.parse(localStorage.getItem("users") || "{}");
+//   users[username] = { salt, hash };
+//   localStorage.setItem("users", JSON.stringify(users));
 
-  showMessage("✅ Usuario registrado correctamente");
-});
+//   showMessage("✅ Usuario registrado correctamente");
+// });
 
 // Manejo de login
-document.getElementById("logSubmitBtn").addEventListener("click", async () => {
-  const username = document.getElementById("logUser").value.trim();
-  const password = document.getElementById("logPass").value;
+// document.getElementById("logSubmitBtn").addEventListener("click", async () => {
+//   const username = document.getElementById("logUser").value.trim();
+//   const password = document.getElementById("logPass").value;
 
-  const users = JSON.parse(localStorage.getItem("users") || "{}");
-  const user = users[username];
+//   const users = JSON.parse(localStorage.getItem("users") || "{}");
+//   const user = users[username];
 
-  if (!user) {
-    showMessage("❌ Usuario no encontrado");
-    return;
-  }
+//   if (!user) {
+//     showMessage("❌ Usuario no encontrado");
+//     return;
+//   }
 
-  const hash = await hashText(password + user.salt);
+//   const hash = await hashText(password + user.salt);
 
-  if (hash === user.hash) {
-    showMessage("✅ Login correcto. Bienvenido, " + username + "!");
-  } else {
-    showMessage("❌ Contraseña incorrecta");
-  }
-});
+//   if (hash === user.hash) {
+//     showMessage("✅ Login correcto. Bienvenido, " + username + "!");
+//   } else {
+//     showMessage("❌ Contraseña incorrecta");
+//   }
+// });
 
-function showMessage(text) {
-  document.getElementById("message").textContent = text;
-}
+// function showMessage(text) {
+//   document.getElementById("message").textContent = text;
+// }

@@ -1,20 +1,29 @@
-import { regUser, regPasswd } from './../utils/constants.js';
+import { showView, showMessage } from '../utils/dom.js';
+import { regUser, regPasswd, oneDay } from './../utils/constants.js';
 import { hashText } from './../utils/crypto.js';
+import { changeExpireDate } from '../utils/cookies.js';
 
-let formEl = document.getElementById('login-view');
-let userNameEl = document.getElementById('logUser');
-let passwdEl = document.getElementById('logPass');
-let submitBtnEl = document.getElementById('logSubmitBtn');
+const formEl = document.getElementById('login-view');
+const userNameEl = document.getElementById('logUser');
+const passwdEl = document.getElementById('logPass');
+const submitBtnEl = document.getElementById('logSubmitBtn');
+
+const goToRegister = document.getElementById('goToRegisterBtn');
+
+// Estado inicial
+userNameEl.classList.remove ('error', 'success');
+passwdEl.classList.remove('error', 'success');
 
 let nameValid = false;
 let passwdValid = false;
 
-const USERNAME_INVALID = 'El nombre de usuario debe tener al menos 3 caracteres';
-const PASSWORD_INVALID = 'La contraseña debe tener 8 caracteres, una mayúscula y una minúscula';
-
 userNameEl.addEventListener('blur', validateName);
 passwdEl.addEventListener('blur', validatePassword);
 
+goToRegister.addEventListener('click', () => showView('register-view'));
+
+
+/* Funciones de validación -----------------------------------*/
 function checkFullForm() {
   nameValid && passwdValid
     ? submitBtnEl.classList.remove('notAvailable')
@@ -23,25 +32,45 @@ function checkFullForm() {
 
 function validateName() {
   nameValid = regUser.test(userNameEl.value.trim());
-  userNameEl.className = nameValid ? 'success' : 'error';
-  const small = userNameEl.parentNode.getElementsByTagName('small')[0];
-  small.textContent = nameValid ? '' : USERNAME_INVALID;
   checkFullForm();
 }
 
 function validatePassword() {
   passwdValid = regPasswd.test(passwdEl.value.trim());
-  passwdEl.className = passwdValid ? 'success' : 'error';
-  const small = passwdEl.parentNode.getElementsByTagName('small')[0];
-  small.textContent = passwdValid ? '' : PASSWORD_INVALID;
   checkFullForm();
 }
 
-formEl.addEventListener('submit', e => {
+/* MANEJO DE LOGIN --------------------------------*/
+// Método contenido en crypto.js (lo personalizamos aquí)
+// Asíncrona, utiliza recursos externos (crypto)
+formEl.addEventListener('click', async () => {
   e.preventDefault();
   if (!formEl.checkValidity()) {
     formEl.reportValidity();
     return;
   }
-  console.log('Login válido');
+
+  const username = userNameEl.value.trim();
+  const password = passwdEl("logPass").value;
+
+  const users = JSON.parse(localStorage.getItem("users") || "{}");
+  const user = users[username];
+
+  if (!user) {
+    showMessage("❌ Usuario no encontrado");
+    return;
+  }
+
+  const hash = await hashText(password + user.salt);
+
+  if (hash === user.hash) {
+    document.cookie = 'username=' + username;
+    changeExpireDate('username', username, oneDay);
+    showView('panel-view');
+  } else {
+    userNameEl.classList.add ('error');
+    passwdEl.classList.add('error');
+    showMessage("❌ Usuario o contraseña incorrectos");
+  }
 });
+

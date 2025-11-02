@@ -11,65 +11,86 @@
 
 <body>
   <main>
-
+    <!-- Pantalla de inicio de sesión -->
     <form name="login-form" id="login-view" class="view active" action="#" method="post">
       <h2>Iniciar Sesión</h2>
       <div class="inputContainer">
         <input type="text" id="logUser" name="text" placeholder="Usuario" required>
-        <small class="noValid"></small>
+        <!-- <small></small> -->
       </div>
       <div class="inputContainer">
         <input type="password" id="logPass" name="password" placeholder="Contraseña" required>
-        <small class="noValid"></small>
+        <!-- <small></small> -->
       </div>
       <div class="btnGroup">
-      <button id="logSubmitBtn" type="submit" class="notAvailable">Entrar</button>
-      <button id="signInBtn" class="linklike">Registrarse</button>
+        <button id="logSubmitBtn" type="submit" class="notAvailable">Entrar</button>
+        <button id="goToRegisterBtn" type="button" class="linklike">Registrarse</button>
       </div>
+      <p id="message"></p>
     </form>
 
-    <form name="register-form" id="register-view" class="view active" action="#" method="post">
+    <!-- Pantalla de registro -->
+    <form name="register-form" id="register-view" class="view" action="#" method="post">
       <h2>Registro</h2>
       <div class="inputContainer">
         <input type="text" id="regUser" name="text" placeholder="Usuario" required>
-        <small class="noValid"></small>
+        <small></small>
       </div>
       <div class="inputContainer">
         <input type="password" id="regPass" name="password" placeholder="Contraseña" required>
-        <small class="noValid"></small>
+        <small></small>
       </div>
       <div class="inputContainer">
         <input type="tel" id="regTlf" name="tlf" placeholder="Teléfono" length="9" required>
-        <small class="noValid"></small>
+        <small></small>
       </div>
       <div class="inputContainer">
         <input type="number" id="regPCode" name="pCode" placeholder="Código Postal" length="5" required>
-        <small class="noValid"></small>
+        <small></small>
       </div>
       <div class="inputInline">
         <input type="checkbox" id="regLegalAge" name="legalAge" value="true">
-        <label for="legalAge">Soy mayor de edad</label>
-        <small class="noValid"></small>
+        <label for="regLegalAge">Soy mayor de edad</label>
+        <small></small>
       </div>
       <div class="inputInline">
-        <input type="number" id="regAge" name="age" min="18" max="99" required>
-        <small class="noValid"></small>
+        <input type="number" id="regAge" name="age" min="18" max="99"><br>
+        <small></small>
       </div>
       <div class="btnGroup">
-      <button id="regSubmitBtn" type="submit" class="notAvailable">Crear Cuenta</button>
-      <button id="loginBtn" class="linklike">¿Ya tienes cuenta? Inicia sesión</button>
+        <button id="regSubmitBtn" type="submit" class="notAvailable">Crear Cuenta</button>
+        <!-- IMPORTANTE: poner type="button" para que el click no sea tratado como submit (el botón está en un form) -->
+        <button id="goToLoginBtn" type="button" class="linklike">¿Ya tienes cuenta? Inicia sesión</button>
       </div>
+      <p id="message"></p>
     </form>
 
-    <section id="panel-view" class="view active">
-  <h2>Bienvenido, <span id="username">elias</span></h2>
+    <!-- Panel de usuario -->
+    <section id="panel-view" class="view">
+      <h2>Bienvenido, <span id="username"></span></h2>
+      <div class="btnGroup">
+        <button id="toggleThemeBtn" type="button">Cambiar tema</button>
+        <button id="logoutBtn" type="button">Cerrar sesión</button>
+      </div>
+    </section>
+  </main>
 
-  <div class="btnGroup">
-    <button id="toggleThemeBtn" type="button">Cambiar tema</button>
-    <button id="logoutBtn" type="button">Cerrar sesión</button>
+  <!-- Banner de Cookies -->
+   <!-- Cookie Banner -->
+<section id="cookie-banner" class="cookie-banner">
+  <div class="cookie-inner">
+    <h2>Usamos cookies</h2>
+    <p>
+      Utilizamos cookies propias y de terceros para mejorar tu experiencia, analizar el tráfico y personalizar contenido.
+      <a class="linklike" href="#">Más información</a>.
+    </p><br>
+    <div class="cookie-actions">
+            <button id="cookie-accept" type="button" autofocus>Aceptar</button>
+            <button id="cookie-reject" type="button">Rechazar</button>
+    </div>
   </div>
 </section>
-  </main>
+
 </body>
 
 </html>

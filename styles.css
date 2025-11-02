@@ -112,17 +112,32 @@ small {
   color: #32047c;
 }
 
-.view { 
+.view, .cookie-banner { 
   display: none; 
 }
 
-.view.active { 
+.active { 
   display: block; 
 }
-#logSubmitBtn, #regSubmitBtn {
-  background: #f0cb09;
 
-}#logSubmitBtn:hover, #regSubmitBtn:hover  {
+.cookie-banner{
+  border: 1px solid rgb(218, 215, 215);
+  background: #f0efef;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  margin: auto;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: fit-content;
+}
+
+#logSubmitBtn, 
+#regSubmitBtn {
+  background: #f0cb09;
+}
+
+#logSubmitBtn:hover, 
+#regSubmitBtn:hover  {
   background:#0d11cc;
 }
 
