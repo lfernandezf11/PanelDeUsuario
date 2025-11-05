@@ -1,4 +1,5 @@
-import { oneYear } from "./constants";
+import { oneYear } from "./constants.js";
+import { setCookieWithExpireDate } from "./cookies.js";
 
 export function applyTheme(isDark) {
   const chooseTheme = document.getElementById('toggleThemeBtn');

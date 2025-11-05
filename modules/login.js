@@ -86,15 +86,21 @@ formEl.addEventListener('submit', async (e) => {
 
   const users = JSON.parse(localStorage.getItem("users") || "{}");
   const user = users[username];
-  const hash = await hashText(password + user.salt);
 
+
+  if (!user) {
+    message.textContent = '❌ Usuario no encontrado';
+    return;
+  }
+
+    const hash = await hashText(password + user.salt);
   if (hash === user.hash) {
     setCookieWithExpireDate('username', username, oneDay);
-    
+    showView('panel-view');
     hydratePanel(); // Rellena <span id="username"> después de crear la cookie.
                     // Panel.js ya se cargó al arrancar la aplicación, cuando se importa a main.js. Eso quiere decir que el username (que ya existía en el dom
                     // aunque estuviese oculto) se encuentra vacío de base, y hay que rellenarlo antes de que se monte la vista. 
-    showView('panel-view');
+   
     resetForm(formEl);
 
   } else {

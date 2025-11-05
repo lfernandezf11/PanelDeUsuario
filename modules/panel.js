@@ -3,6 +3,7 @@ import { showView } from '../utils/dom.js';
 import { applyTheme, saveThemeCookie } from '../utils/theme.js';
 
 const logout = document.getElementById('logoutBtn');
+const chooseTheme = document.getElementById('toggleThemeBtn');
 
 // Estado inicial 
 const savedTheme = getCookie('theme');      // 'dark' | 'light' | undefined
