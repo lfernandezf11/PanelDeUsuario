@@ -13,6 +13,10 @@ body.dark {
   background: #1f1f1f;
 }
 
+body.dark input {
+  background: #2c2b2b;
+}
+
 main{
   max-height: 100vh;
   display: flex;
@@ -29,9 +33,6 @@ input{
   border-radius: 15px;
 }
 
-input.dark {
-  background: #2c2b2b;
-}
 
 button {
   flex: 1;

@@ -1,14 +1,29 @@
 import { getCookie, setCookieWithExpireDate } from '../utils/cookies.js';
 import { showView } from '../utils/dom.js';
-import { oneYear } from '../utils/constants.js';
+import { applyTheme, saveThemeCookie } from '../utils/theme.js';
 
-const chooseTheme = document.getElementById('toggleThemeBtn');
 const logout = document.getElementById('logoutBtn');
-const input = document.querySelectorAll('input');
+
+// Estado inicial 
+const savedTheme = getCookie('theme');      // 'dark' | 'light' | undefined
+const isDark = savedTheme === 'dark';
+applyTheme(isDark);
+
+// Si no existía cookie, define la predeterminada
+if (!savedTheme) saveThemeCookie(false);
 
 
-chooseTheme.innerText = "Modo Oscuro";
-setCookieWithExpireDate('theme', 'light', oneYear);
+logout.addEventListener('click', () => {
+    document.cookie = 'username=; Max-Age=0; path=/PanelDeUsuario';
+    showView('login-view');
+});
+
+chooseTheme.addEventListener('click', () => {
+  const willBeDark = !document.body.classList.contains('dark');
+  applyTheme(willBeDark);
+  saveThemeCookie(willBeDark);
+});
+
 
 export function hydratePanel() {
   const username = document.getElementById('username');
@@ -16,17 +31,3 @@ export function hydratePanel() {
   const user = getCookie('username'); 
   username.textContent = user || '';
 }
-
-logout.addEventListener('click', () => {
-    document.cookie = 'username=; Max-Age=0; path=/PanelDeUsuario';
-    showView('login-view');
-});
-
-chooseTheme.addEventListener('click', (e) => {
-    const light = chooseTheme.innerText === "Modo Oscuro";
-    chooseTheme.innerText = light ? "Modo Claro" : "Modo Oscuro";
-    document.body.classList.toggle('dark');
-    input.classList.toggle('dark');
-    if(getCookie('theme') === 'light' && light) setCookieWithExpireDate('theme', 'dark', oneYear);
-});
-
