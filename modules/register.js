@@ -178,7 +178,7 @@ formEl.addEventListener('submit', async (e) => {
   };
 
   localStorage.setItem('users', JSON.stringify(users));
-  message.textContent = '✅ Usuario registrado correctamente';
+  alert('✅ Usuario registrado correctamente');
   setTimeout(() => showView('login-view'), 1000);
   resetForm(formEl);
 });
