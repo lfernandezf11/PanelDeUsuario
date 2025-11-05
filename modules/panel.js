@@ -15,7 +15,7 @@ if (!savedTheme) saveThemeCookie(false);
 
 
 logout.addEventListener('click', () => {
-    document.cookie = 'username=; Max-Age=0; path=/PanelDeUsuario';
+    setCookieWithExpireDate('username', '', 1); // = 'username=; Max-Age=0; path=/PanelDeUsuario';
     showView('login-view');
 });
 

@@ -16,6 +16,10 @@ body.dark {
 body.dark input {
   background: #2c2b2b;
 }
+body.dark input:focus {
+  color: white;
+  background: #525151;
+}
 
 main{
   max-height: 100vh;
