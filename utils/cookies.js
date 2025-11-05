@@ -6,32 +6,28 @@ const reject= document.getElementById('cookie-reject');
 
 
 //Estado inicial
-bannerCookies.classList.add('active');
+const status = getCookie('cookiesAccepted'); 
+if (status !== 'true') {
+  bannerCookies.classList.add('active'); 
+} else {
+  bannerCookies.classList.remove('active');
+}
 
 accept.addEventListener('click', () => {
-    document.cookie = 'cookiesAccepted=true';
-    changeExpireDate('cookiesAccepted', 'true', oneYear);
+    setCookieWithExpireDate('cookiesAccepted', 'true', oneYear);
     bannerCookies.classList.remove('active');
 });
 
 reject.addEventListener('click', () => {
-    document.cookie = 'cookiesAccepted=false';
-    changeExpireDate('cookiesAccepted', 'false', oneDay);
+    setCookieWithExpireDate('cookiesAccepted', 'false', oneDay);
     bannerCookies.classList.remove('active');
 });
 
-function setCookie(name, value, ms, path = "/", secure = false) {
-  const maxAge = Math.floor(ms / 1000);
-  document.cookie =
-    `${name}=${encodeURIComponent(value)}; ` +
-    `Max-Age=${maxAge}; path=${path}; SameSite=Lax` +
-    (secure ? `; Secure` : ``);
-}
 
-export function changeExpireDate(cookieName, cookieValue, newTime) {
+export function setCookieWithExpireDate(cookieName, cookieValue, timeValidity) {
   let now = new Date();
   let time = now.getTime();
-  let expireTime = time + newTime;
+  let expireTime = time + timeValidity;
   now.setTime(expireTime);
   let cookieExpireDate = now.toUTCString();
   document.cookie = cookieName + "=" + cookieValue + "; expires=" + cookieExpireDate;

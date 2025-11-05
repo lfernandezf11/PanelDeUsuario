@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <script src="main.js" type="module" defer></script>
   <title>Forms</title>
 </head>
@@ -18,15 +19,18 @@
         <input type="text" id="logUser" name="text" placeholder="Usuario" required>
         <!-- <small></small> -->
       </div>
-      <div class="inputContainer">
+      <div class="inputContainer password-field password-fieldLog">
         <input type="password" id="logPass" name="password" placeholder="Contraseña" required>
+        <button type="button" class="toggle-pass toggle-passLog">
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
         <!-- <small></small> -->
       </div>
       <div class="btnGroup">
         <button id="logSubmitBtn" type="submit" class="notAvailable">Entrar</button>
         <button id="goToRegisterBtn" type="button" class="linklike">Registrarse</button>
       </div>
-      <p id="message"></p>
+      <p id="messageLog" class="message"></p>
     </form>
 
     <!-- Pantalla de registro -->
@@ -36,8 +40,13 @@
         <input type="text" id="regUser" name="text" placeholder="Usuario" required>
         <small></small>
       </div>
-      <div class="inputContainer">
+      <div class="inputContainer password-field password-fieldReg">
         <input type="password" id="regPass" name="password" placeholder="Contraseña" required>
+        <button type="button" class="toggle-pass toggle-passReg">
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+        <!-- <i class="fa fa-eye-slash" aria-hidden="true"></i> -->
+
         <small></small>
       </div>
       <div class="inputContainer">
@@ -62,12 +71,12 @@
         <!-- IMPORTANTE: poner type="button" para que el click no sea tratado como submit (el botón está en un form) -->
         <button id="goToLoginBtn" type="button" class="linklike">¿Ya tienes cuenta? Inicia sesión</button>
       </div>
-      <p id="message"></p>
+      <p id="messageReg" class="message"></p>
     </form>
 
     <!-- Panel de usuario -->
     <section id="panel-view" class="view">
-      <h2>Bienvenido, <span id="username"></span></h2>
+      <h2>Bienvenida(o), <span id="username"></span></h2>
       <div class="btnGroup">
         <button id="toggleThemeBtn" type="button">Cambiar tema</button>
         <button id="logoutBtn" type="button">Cerrar sesión</button>
@@ -76,20 +85,21 @@
   </main>
 
   <!-- Banner de Cookies -->
-   <!-- Cookie Banner -->
-<section id="cookie-banner" class="cookie-banner">
-  <div class="cookie-inner">
-    <h2>Usamos cookies</h2>
-    <p>
-      Utilizamos cookies propias y de terceros para mejorar tu experiencia, analizar el tráfico y personalizar contenido.
-      <a class="linklike" href="#">Más información</a>.
-    </p><br>
-    <div class="cookie-actions">
-            <button id="cookie-accept" type="button" autofocus>Aceptar</button>
-            <button id="cookie-reject" type="button">Rechazar</button>
+  <!-- Cookie Banner -->
+  <section id="cookie-banner" class="cookie-banner">
+    <div class="cookie-inner">
+      <h2>Usamos cookies</h2>
+      <p>
+        Utilizamos cookies propias y de terceros para mejorar tu experiencia, analizar el tráfico y personalizar
+        contenido.
+        <a class="linklike" href="#">Más información</a>.
+      </p><br>
+      <div class="cookie-actions">
+        <button id="cookie-accept" type="button" autofocus>Aceptar</button>
+        <button id="cookie-reject" type="button">Rechazar</button>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 </body>
 

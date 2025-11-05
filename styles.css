@@ -78,7 +78,30 @@ small {
   flex-direction: column;
   gap: 0.2rem;
   margin-top: 1.8rem;
+}
 
+.inputContainer.password-field { /* Todos los inputContainer son flex, hay que crearle al de la contraseña un padding derecho que permita alojar el icon*/
+  position: relative; 
+}
+
+.inputContainer.password-field input { 
+  padding-right: 2rem; 
+}
+
+/* Botón del ojo dentro del campo */
+.inputContainer.password-field .toggle-pass{
+  position: absolute;
+  right: 0.6rem;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: grey;
+  cursor: pointer;
 }
 
 .inputInline {
@@ -112,7 +135,7 @@ small {
   color: #32047c;
 }
 
-.view, .cookie-banner { 
+.view { 
   display: none; 
 }
 
@@ -120,7 +143,11 @@ small {
   display: block; 
 }
 
-.cookie-banner{
+.cookie-banner { 
+  display: none; 
+}
+.cookie-banner.active{
+  display: block;
   border: 1px solid rgb(218, 215, 215);
   background: #f0efef;
   border-radius: 12px;

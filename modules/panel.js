@@ -5,14 +5,14 @@ const username = document.getElementById('username');
 const chooseTheme = document.getElementById('toggleThemeBtn');
 const logout = document.getElementById('logoutBtn');
 
-username.textContent = getCookie('username');
+username.textContent = getCookie();
 
 logout.addEventListener('click', () => {
-    document.cookie = 'username=; Max-Age=0; path=/';
+    document.cookie = 'username=; Max-Age=0; path=/PanelDeUsuario';
     showView('login-view');
 });
 
-chooseTheme.addEventListener('click', (e) => {
-    document.cookie = 'theme='
-})
-
+// chooseTheme.addEventListener('click', (e) => {
+//     document.cookie = 'theme='
+// })
+// Meter el ojo de la contraseña

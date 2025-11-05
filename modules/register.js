@@ -1,4 +1,4 @@
-import { showView, showMessage, showError } from '../utils/dom.js';
+import { showView, showError, resetForm, togglePassword } from '../utils/dom.js';
 import { regUser, regPasswd, regTel, regPCode } from '../utils/constants.js';
 import { hashText, generateSalt } from './../utils/crypto.js';
 
@@ -11,10 +11,14 @@ const legalAgeEl = document.getElementById('regLegalAge');
 const ageEl = document.getElementById('regAge');
 const ageContainer = document.getElementById('regAge').parentElement; //Como el input age está contenido en el div inputInline, hacemos referencia a él para controlar el display de todo el bloque.
 const submitBtnEl = document.getElementById('regSubmitBtn');
+const message = document.getElementById('messageReg');
+
+const togglePassEl = document.querySelector('#register-view .password-field .toggle-pass'); //Especificamos la vista para que no atrape el botón del login.
+const iconEl = togglePassEl.querySelector('i');
 
 const goToLogin = document.getElementById('goToLoginBtn');
 
-// Estado inicial: checkbox no marcado, campo edad oculto y disabled.
+// Estado inicial: checkbox no marcado, campo edad oculto y disabled. Icono de contraseña de ojo abierto.
 legalAgeEl.checked = false;
 ageContainer.style.display = 'none'; // Estado inicial del contenedor del campo.
 ageEl.required = false;
@@ -33,7 +37,26 @@ const POSTALCODE_INVALID = 'El código postal debe tener 5 dígitos';
 const AGE_INVALID = 'Es obligatorio que indique su edad (18-99) si marca la casilla';
 
 userNameEl.addEventListener('blur', validateName);
-passwdEl.addEventListener('blur', validatePassword);
+
+// Para evitar que salte validatePassword() cuando pulsamos el botón del ojo: 
+// 1. Evitamos que el botón capte el foco:
+togglePassEl.addEventListener('pointerdown', (e) => e.preventDefault()); 
+togglePassEl.addEventListener('click', () => { 
+  togglePassword(passwdEl, iconEl);
+  passwdEl.focus({ preventScroll: true }); //Devuelve el foco al input de la contraseña después del click (para seguir escirbiendo si volver a clicar el campo)
+});
+
+// 2. Aseguramos que sólo se ejecute validatePassword si el target del foco es el toggle. ESTO ES UN SEGURO, EN TEORÍA NO HACE FALTA.
+/* Para evitar que ocurra la pérdida del foco al pulsar el ojo, cambiamos el evento del input de la contraseña de 'blur' (que solo se dispara en el propio 
+ * elemento) a 'focusout', que "burbujea" desde el foco a sus elementos padre hasta llegar a document/window. 
+ * ¿Qué quiere decir esto? Que cuando pulsamos el botón (focusable por defecto), no el icon, del ojo, éste captura el foco, es decir, es el Target  
+ * (relatedTarget) del foco que se pierde en el input. 
+ */
+passwdEl.addEventListener('focusout', (e) => {
+  if (e.relatedTarget && e.relatedTarget.closest('.toggle-pass')) return; 
+  validatePassword();
+});
+
 tlfEl.addEventListener('blur', validateTelephone);
 pCodeEl.addEventListener('blur', validatePostalCode);
 ageEl.addEventListener('blur', validateAge);
@@ -41,8 +64,11 @@ ageEl.addEventListener('blur', validateAge);
 // Es decir, si rellenamos todos los campos y no llegamos a hacer check, el botón de 'crear usuario' no se habilita.
 validateAge();
 
-
-goToLogin.addEventListener('click', () => showView('login-view'));
+goToLogin.addEventListener('click', (e) => {
+  e.preventDefault();
+  showView('login-view');
+  resetForm(formEl);
+});
 
 // Muestra el campo de edad y lo hace obligatorio cuando el checkbox está marcado
 legalAgeEl.addEventListener('change', () => {
@@ -53,7 +79,6 @@ legalAgeEl.addEventListener('change', () => {
   ageEl.disabled = !show;
   validateAge();
 });
-
 
 
 /* Funciones de validación ---------------------------------------*/
@@ -153,8 +178,8 @@ formEl.addEventListener('submit', async (e) => {
   };
 
   localStorage.setItem('users', JSON.stringify(users));
-
-  showMessage('✅ Usuario registrado correctamente');
-  setTimeout(() => showView('login-view'), 1500);
+  message.textContent = '✅ Usuario registrado correctamente';
+  setTimeout(() => showView('login-view'), 1000);
+  resetForm(formEl);
 });
 
