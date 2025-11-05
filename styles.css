@@ -8,6 +8,11 @@ body{
   padding: 100px;
 }
 
+body.dark {
+  color: white;
+  background: #1f1f1f;
+}
+
 main{
   max-height: 100vh;
   display: flex;
@@ -22,6 +27,10 @@ h2{
 input{
   padding: 10px;
   border-radius: 15px;
+}
+
+input.dark {
+  background: #2c2b2b;
 }
 
 button {
@@ -80,6 +89,7 @@ small {
   margin-top: 1.8rem;
 }
 
+
 .inputContainer.password-field { /* Todos los inputContainer son flex, hay que crearle al de la contraseña un padding derecho que permita alojar el icon*/
   position: relative; 
 }
@@ -92,7 +102,7 @@ small {
 .inputContainer.password-field .toggle-pass{
   position: absolute;
   right: 0.6rem;
-  top: 40%;
+  top: 30%;
   transform: translateY(-50%);
   width: 2rem;
   height: auto;
