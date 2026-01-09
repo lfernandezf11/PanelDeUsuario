@@ -7,7 +7,7 @@ import { hydratePanel } from './panel.js';
 const formEl = document.getElementById('login-view');
 const userNameEl = document.getElementById('logUser');
 const passwdEl = document.getElementById('logPass');
-const submitBtnEl = document.getElementById('logSubmitBtn');
+// const submitBtnEl = document.getElementById('logSubmitBtn');
 const message = document.getElementById('messageLog');
 
 const goToRegister = document.getElementById('goToRegisterBtn');
@@ -18,15 +18,15 @@ const iconEl = togglePassEl.querySelector('i');
 
 
 // Estado inicial
-userNameEl.classList.remove('error','success');
-passwdEl.classList.remove('error','success');
+userNameEl.classList.remove('error', 'success');
+passwdEl.classList.remove('error', 'success');
 userNameEl.value = '';
-passwdEl.value   = '';
+passwdEl.value = '';
 
-let nameValid = false;
-let passwdValid = false;
+// let nameValid = false;
+// let passwdValid = false;
 
-userNameEl.addEventListener('blur', validateName);
+// userNameEl.addEventListener('blur', validateName);
 
 // Para evitar que salte validatePassword() cuando pulsamos el botón del ojo: 
 // 1. Evitamos que el botón capte el foco:
@@ -42,10 +42,10 @@ togglePassEl.addEventListener('click', () => {
  * ¿Qué quiere decir esto? Que cuando pulsamos el botón (focusable por defecto), no el icon, del ojo, éste captura el foco, es decir, es el Target  
  * (relatedTarget) del foco que se pierde en el input. 
  */
-passwdEl.addEventListener('focusout', (e) => {
-  if (e.relatedTarget && e.relatedTarget.closest('.toggle-pass')) return; 
-  validatePassword();
-});
+// passwdEl.addEventListener('focusout', (e) => {
+//   if (e.relatedTarget && e.relatedTarget.closest('.toggle-pass')) return; 
+//   validatePassword();
+// });
 
 goToRegister.addEventListener('click', (e) => {
   e.preventDefault();
@@ -55,21 +55,21 @@ goToRegister.addEventListener('click', (e) => {
 
 
 /* Funciones de validación -----------------------------------*/
-function checkFullForm() {
-  nameValid && passwdValid
-    ? submitBtnEl.classList.remove('notAvailable')
-    : submitBtnEl.classList.add('notAvailable');
-}
+// function checkFullForm() {
+//   nameValid && passwdValid
+//     ? submitBtnEl.classList.remove('notAvailable')
+//     : submitBtnEl.classList.add('notAvailable');
+// }
 
-function validateName() {
-  nameValid = regUser.test(userNameEl.value.trim());
-  checkFullForm();
-}
+// function validateName() {
+//   nameValid = regUser.test(userNameEl.value.trim());
+//   // checkFullForm();
+// }
 
-function validatePassword() {
-  passwdValid = regPasswd.test(passwdEl.value.trim());
-  checkFullForm();
-}
+// function validatePassword() {
+//   passwdValid = regPasswd.test(passwdEl.value.trim());
+//   // checkFullForm();
+// }
 
 /* MANEJO DE LOGIN --------------------------------*/
 // Método contenido en crypto.js (lo personalizamos aquí)
@@ -82,7 +82,14 @@ formEl.addEventListener('submit', async (e) => {
   }
 
   const username = userNameEl.value.trim();
-  const password = passwdEl.value;
+  const password = passwdEl.value.trim();
+
+  if (!regUser.test(username) || !regPasswd.test(password)) {
+    userNameEl.classList.add('error');
+    passwdEl.classList.add('error');
+    message.textContent = "❌ Usuario o contraseña incorrectos";
+    return;
+  }
 
   const users = JSON.parse(localStorage.getItem("users") || "{}");
   const user = users[username];
@@ -93,20 +100,21 @@ formEl.addEventListener('submit', async (e) => {
     return;
   }
 
-    const hash = await hashText(password + user.salt);
+  const hash = await hashText(password + user.salt);
   if (hash === user.hash) {
     setCookieWithExpireDate('username', username, oneDay);
     showView('panel-view');
     hydratePanel(); // Rellena <span id="username"> después de crear la cookie.
-                    // Panel.js ya se cargó al arrancar la aplicación, cuando se importa a main.js. Eso quiere decir que el username (que ya existía en el dom
-                    // aunque estuviese oculto) se encuentra vacío de base, y hay que rellenarlo antes de que se monte la vista. 
-   
+    // Panel.js ya se cargó al arrancar la aplicación, cuando se importa a main.js. Eso quiere decir que el username (que ya existía en el dom
+    // aunque estuviese oculto) se encuentra vacío de base, y hay que rellenarlo antes de que se monte la vista. 
+
     resetForm(formEl);
 
-  } else {
+  }else{
     userNameEl.classList.add('error');
     passwdEl.classList.add('error');
     message.textContent = "❌ Usuario o contraseña incorrectos";
+    return;
   }
 });
 

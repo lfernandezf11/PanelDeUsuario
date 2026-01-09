@@ -43,8 +43,8 @@ export function getCookie(cookieName) {
     while (cookie.charAt(0) == " ") {
       cookie = cookie.substring(1);
     }
-    if (cookie.indexOf(nombre) == 0) {
-      return cookie.substring(nombre.length, cookie.length);
+    if (cookie.startsWith(nombre)) { 
+      return cookie.substring(nombre.length, cookie.length); //Alternativa: cookie.slice(nombre.length)
     }
   }
   return "";
